@@ -4,6 +4,7 @@
 - got to localhost "http://127.0.0.1:5001/"
 - upload image from 'img_sample_test' for testing
 
-<p><img src="https://github.com/venky14/Face-Recogintion-with-Python/blob/master/img/fr_img_demo.png?raw=true"></p>
+<p><img src="https://github.com/venky14/Face-Recogintion-with-Python/blob/main/img/fr_img_demo.png?raw=true"></p>
 
 Note: Face Recognition model is trained on famous faces from Politicians of India and Bollywood!
+
