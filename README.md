@@ -1,4 +1,4 @@
-## Gitlab repo for facerecog
+## Face Recognition with Python API
 
 - setup and execute faceRec_api.py
 - got to localhost "http://127.0.0.1:5001/"
