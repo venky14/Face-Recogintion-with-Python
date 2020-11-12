@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <title>Face Recognition Demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+    </head>
+
+    <body class="text-center">
+        <title>Face Recognition Demo</title>
+        <h1>Upload an image to perform Face Recognition</h1>
+        <form class="form-upload" method=post enctype=multipart/form-data>
+            <input type=file name=image>
+            <input type=submit value=Upload>
+            <br>
+
+            {% if image_loc %}
+            <img class="mb-4" src="static/img/{{image_loc}}" alt="" width="450" height="450">
+            <!-- <h3>Prediction: {{prediction}}</h3> -->
+            {%endif%}
+            <!-- <br> -->
+
+        </form>
+
+        <!-- to show predicted faces with name | Need to write JavaScript -->
+        <div class="container">
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Predicted Face:</h3>
+                            <table id="prediction_table" class="table table-dark">
+                                <tbody>
+                                    <tr id="predicted_images"></tr>
+                                    <tr id="predicted_names"></tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        -->
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="./static/js/bootstrap.min.js"></script>
+        <script src="./static/js/index.js"></script>
+        <!-- <script src="./static/js/index.js"></script> -->
+        <script type="text/javascript">
+            $(function() {
+                const predictedData  = JSON.stringify({{ prediction | tojson }})
+                predictionsDecodedData = JSON.parse(predictedData)
+                // console.log(predictionsDecodedData)
+                $("table#prediction_table tbody tr#predicted_images, table#prediction_table tbody tr#predicted_names").empty()
+                $.each(predictionsDecodedData, function(filePath, faceName) {
+                    $("table#prediction_table tbody tr#predicted_images").append("<td><img src='./static/img_op/"+filePath+"'></td>")
+                    $("table#prediction_table tbody tr#predicted_names").append("<td>"+faceName+"</td>")
+                });
+            })
+        </script>
+    </body>
+</html>
